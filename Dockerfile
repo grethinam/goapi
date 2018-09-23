@@ -11,4 +11,4 @@ RUN go build
 
 ENTRYPOINT /go/bin/app
 
-EXPOSE 8080
+EXPOSE 3000
