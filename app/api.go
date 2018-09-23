@@ -1,11 +1,11 @@
 package main
 
 import (
-	"bytes"
+//	"bytes"
 	"database/sql"
-	"fmt"
+//	"fmt"
 	"net/http"
-	"log"
+//	"log"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
