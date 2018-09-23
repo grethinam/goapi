@@ -39,10 +39,10 @@ func main() {
 	
 	// GET all persons
 	router.GET("/employee", func(c *gin.Context) {
-	var (
-		employee := Employee{}
-		employees := []Employee{}
-	)
+
+	employee := Employee{}
+	employees := []Employee{}
+
 	db := dbConnect()
 	rows, err := db.Query("select * from employees")
 	checkErr(err)
