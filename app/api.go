@@ -100,7 +100,6 @@ func main() {
 		sname := c.PostForm("sname")
 		dname := c.PostForm("dname")
 		email := c.PostForm("email")
-		var buffer bytes.Buffer
 		insForm, err := db.Prepare("INSERT INTO employees(first_name, last_name, department, email) VALUES(?,?,?,?);")
 	    checkErr(err)
         insForm.Exec(fname, sname, dname, email)
