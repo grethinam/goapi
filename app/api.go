@@ -77,6 +77,7 @@ func main() {
 		selDB, err := db.Query("SELECT * FROM employees WHERE id=?", id)
 		checkErr(err)
 		err = selDB.Scan(&employee.Id, &employee.Fname, &employee.Sname, &employee.Dname, &employee.Email)
+		
 		if err != nil {
 			// If no results send null
 			result = gin.H{
