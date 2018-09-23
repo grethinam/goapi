@@ -75,7 +75,7 @@ func main() {
 		id := c.Param("id")
 		db := dbConnect()		
 		row := db.QueryRow("SELECT id, first_name, last_name, department, email  FROM employees WHERE id=?", id)
-		err = row.Scan(&employee.Id, &employee.Fname, &employee.Sname, &employee.Dname, &employee.Email)
+		err := row.Scan(&employee.Id, &employee.Fname, &employee.Sname, &employee.Dname, &employee.Email)
 		if err != nil {
 			// If no results send null
 			result = gin.H{
