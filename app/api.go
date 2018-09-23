@@ -127,7 +127,7 @@ func main() {
 		email := c.PostForm("email")
 		upForm, err := db.Prepare("UPDATE employees SET first_name=?, last_name=?, department=?, email=? WHERE id=?;")
 	    checkErr(err)
-        upForm.Exec(fname, sname, dname, email)
+        upForm.Exec(fname, sname, dname, email, id)
         log.Println("INSERT: First Name: " + fname + " | LAST_NAME: " + sname+ " | DEPARTMENT: " + dname+ " | EMAIL: " + email)
 
 		// Fastest way to append strings
