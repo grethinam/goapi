@@ -74,7 +74,7 @@ func main() {
 		)
 		id := c.Param("id")
 		db := dbConnect()		
-		selDB, err := db.QueryRow("SELECT * FROM employees WHERE id=?", id)
+		selDB, err := db.Query("SELECT * FROM employees WHERE id=?", id)
 		checkErr(err)
 		err = selDB.Scan(&employee.Id, &employee.Fname, &employee.Sname, &employee.Dname, &employee.Email)
 		if err != nil {
