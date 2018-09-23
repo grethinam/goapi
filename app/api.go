@@ -65,5 +65,32 @@ func main() {
 			"count":  len(employees),
 		})
 	})
+	
+	// GET a person detail
+	router.GET("/person/:id", func(c *gin.Context) {
+		var (
+			employee Employee
+			result gin.H
+		)
+		id := c.Param("id")
+		db := dbConnect()		
+		row := db.QueryRow("SELECT * FROM employees WHERE id=?;", id)
+		err = row.Scan(&employee.Id, &employee.Fname, &employee.Sname, &employee.Dname, &employee.Email)
+		if err != nil {
+			// If no results send null
+			result = gin.H{
+				"result": nil,
+				"count":  0,
+			}
+		} else {
+			result = gin.H{
+				"result": employee,
+				"count":  1,
+			}
+		}
+		c.JSON(http.StatusOK, result)
+		defer db.Close()
+	})
 	router.Run(":3000")	
+	
 }
