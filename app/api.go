@@ -67,17 +67,15 @@ func main() {
 	})
 	
 	// GET a person detail
-	router.GET("/person/:id", func(c *gin.Context) {
+	router.GET("/employee/:id", func(c *gin.Context) {
 		var (
 			employee Employee
 			result gin.H
 		)
 		id := c.Param("id")
 		db := dbConnect()		
-		selDB, err := db.Query("SELECT * FROM employees WHERE id=?", id)
-		checkErr(err)
-		err = selDB.Scan(&employee.Id, &employee.Fname, &employee.Sname, &employee.Dname, &employee.Email)
-		
+		row := db.QueryRow("SELECT id, first_name, last_name, department, email  FROM employees WHERE id=?", id)
+		err = row.Scan(&employee.Id, &employee.Fname, &employee.Sname, &employee.Dname, &employee.Email)
 		if err != nil {
 			// If no results send null
 			result = gin.H{
