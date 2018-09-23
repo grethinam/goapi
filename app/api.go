@@ -116,6 +116,21 @@ func main() {
 	defer db.Close()
 	})
 
+	// DELETE a person details
+	router.DELETE("/employ", func(c *gin.Context) {
+	db := dbConnect()
+	id := c.Query("id")
+	delForm, err := db.Prepare("DELETE FROM employees WHERE id=?;")
+	checkErr(err)
+    delForm.Exec(emp)
+    log.Println("DELETE")
+	
+	c.JSON(http.StatusOK, gin.H{
+		"message": fmt.Sprintf("Successfully deleted user: %s", id),
+	})
+    defer db.Close()
+	})
+	
 	router.Run(":3000")	
 	
 }
