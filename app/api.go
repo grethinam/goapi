@@ -122,7 +122,7 @@ func main() {
 	id := c.Query("id")
 	delForm, err := db.Prepare("DELETE FROM employees WHERE id=?;")
 	checkErr(err)
-    delForm.Exec(emp)
+    delForm.Exec(id)
     log.Println("DELETE")
 	
 	c.JSON(http.StatusOK, gin.H{
