@@ -115,6 +115,31 @@ func main() {
 		})
 	defer db.Close()
 	})
+	
+	// Update a person details
+	router.PUT("/employ", func(c *gin.Context) {
+		db := dbConnect()
+		var buffer bytes.Buffer
+		id := c.Query("id")
+		fname := c.PostForm("fname")
+		sname := c.PostForm("sname")
+		dname := c.PostForm("dname")
+		email := c.PostForm("email")
+		upForm, err := db.Prepare("UPDATE employees SET first_name=?, last_name=?, department=?, email=? WHERE id=?;")
+	    checkErr(err)
+        upForm.Exec(fname, sname, dname, email)
+        log.Println("INSERT: First Name: " + fname + " | LAST_NAME: " + sname+ " | DEPARTMENT: " + dname+ " | EMAIL: " + email)
+
+		// Fastest way to append strings
+		buffer.WriteString(fname)
+		buffer.WriteString(" ")
+		buffer.WriteString(sname)
+		name := buffer.String()
+		c.JSON(http.StatusOK, gin.H{
+			"message": fmt.Sprintf(" %s successfully Updated", name),
+		})
+	defer db.Close()
+	})
 
 	// DELETE a person details
 	router.DELETE("/employ", func(c *gin.Context) {
